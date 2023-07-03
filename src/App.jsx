@@ -1,29 +1,41 @@
 import { Outlet, Route, Router, Routes } from "react-router-dom";
 import TopStoriesList from "./TopStoriesList";
 import {
-  Box,
-  Card,
-  Grid,
-  Select,
-  Stack,
-  TextField,
-  Typography,
+	Box,
+	Card,
+	Container,
+	Grid,
+	Select,
+	Stack,
+	TextField,
+	Typography,
 } from "@mui/material";
 import StoryDetails from "./StoryDetails";
 
 function App() {
-  return (
-    <>
-      <Typography fontSize={"3rem"} fontWeight={"bold"}>
-        NYTIMES APP
-      </Typography>
+	return (
+		<>
+			<Typography
+				sx={{ display: "flex", justifyContent: "center", m: 2 }}
+				fontSize={"3rem"}
+				fontWeight={"bold"}
+				fontFamily={"Roboto"}
+			>
+				NYTIMES APP
+			</Typography>
 
-      <Routes>
-        <Route path="/" element={<TopStoriesList />} />
-        <Route path="/details" element={<StoryDetails />} />
-      </Routes>
-    </>
-  );
+			<Routes>
+				<Route
+					path="/"
+					element={<TopStoriesList />}
+				/>
+				<Route
+					path="/details/:index"
+					element={<StoryDetails />}
+				/>
+			</Routes>
+		</>
+	);
 }
 
 export default App;
