@@ -11,29 +11,24 @@ import {
 	Typography,
 } from "@mui/material";
 import StoryDetails from "./StoryDetails";
+import NytSvg from "./NytSvg";
 
 function App() {
 	return (
 		<>
-			<Typography
-				sx={{ display: "flex", justifyContent: "center", m: 2 }}
-				fontSize={"3rem"}
-				fontWeight={"bold"}
-				fontFamily={"Roboto"}
-			>
-				NYTIMES APP
-			</Typography>
-
-			<Routes>
-				<Route
-					path="/"
-					element={<TopStoriesList />}
-				/>
-				<Route
-					path="/details/:index"
-					element={<StoryDetails />}
-				/>
-			</Routes>
+			<NytSvg />
+			<Container>
+				<Routes>
+					<Route
+						path="/"
+						element={<TopStoriesList />}
+					/>
+					<Route
+						path="/details/:index"
+						element={<StoryDetails />}
+					/>
+				</Routes>
+			</Container>
 		</>
 	);
 }

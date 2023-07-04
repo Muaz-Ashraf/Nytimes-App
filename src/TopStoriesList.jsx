@@ -1,6 +1,7 @@
 import {
 	Box,
 	Card,
+	Container,
 	Grid,
 	MenuItem,
 	Select,
@@ -71,22 +72,35 @@ const TopStoriesList = () => {
 						sx={{
 							flex: 1,
 							display: "flex",
-							alignItems: "center",
-							bgcolor: "lightblue",
-							py: 5,
+							justifyContent: "center",
+
+							bgcolor: "#202020",
+							color: "white",
+							// py: 5,
 							px: 3,
+							border: "2px solid black",
 
 							transition: "all 0.2s ease-in-out",
 							"&:hover": {
-								bgcolor: "blue",
-								color: "white",
+								bgcolor: "#606060",
+
 								cursor: "pointer",
 							},
 						}}
 					>
-						<Typography fontWeight="bold">
-							{index + 1}.{story.title}
-						</Typography>
+						<Stack direction="column">
+							<Typography
+								fontWeight="bold"
+								sx={{
+									display: "flex",
+									justifyContent: "center",
+									borderBottom: "1px solid white",
+								}}
+							>
+								{index + 1}.
+							</Typography>
+							<Typography py={2}>{story.title}</Typography>
+						</Stack>
 					</Card>
 				</Grid>
 			))}
