@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 const TopStoriesList = () => {
 	const navigate = useNavigate();
 	const [data, setData] = useState([]);
+
 	const getData = async () => {
 		const response = await fetch(
 			"https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=vpPk0dSc3wlSGZUQriw78bkglP22tr2E"
@@ -22,81 +23,73 @@ const TopStoriesList = () => {
 		setData(responseData.results);
 		console.log(responseData.results);
 	};
+
 	useEffect(() => {
 		getData();
 	}, []);
+
 	return (
 		<Grid
 			container
 			spacing={2}
-			px={"50px"}
+			style={{ display: "flex", flexWrap: "wrap" }}
 		>
 			<Grid
 				item
 				xs={6}
-				px={"100px"}
 			>
 				<Select
 					fullWidth
 					placeholder="Select Category"
 				>
-					<MenuItem>World</MenuItem>
-					<MenuItem>Science</MenuItem>
+					<MenuItem value="World">World</MenuItem>
+					<MenuItem value="Science">Science</MenuItem>
 				</Select>
 			</Grid>
 			<Grid
 				item
 				xs={6}
-				px={"100px"}
 			>
 				<TextField
 					fullWidth
 					label="Search for article"
 				/>
 			</Grid>
-			{data?.map((story, index) => {
-				return (
-					<Grid
-						key={index}
-						item
-						xs={6}
-						md={4}
-						lg={3}
-						spacing={1}
-						alignItems="center"
-						justifyContent="center"
-						// m={"2px"}
-					>
-						<Card
-							onClick={() =>
-								navigate(`/details/${index}`, { state: { story: story } })
-							}
-							sx={{
-								bgcolor: "lightblue",
-								p: 2,
-								height: "100%",
-								// my: 10,
+			{data?.map((story, index) => (
+				<Grid
+					key={index}
+					item
+					xs={6}
+					md={4}
+					lg={3}
+					sx={{ display: "flex" }}
+				>
+					<Card
+						onClick={() =>
+							navigate(`/details/${index}`, { state: { story: story } })
+						}
+						sx={{
+							flex: 1,
+							display: "flex",
+							alignItems: "center",
+							bgcolor: "lightblue",
+							py: 5,
+							px: 3,
 
-								transition: "all 0.2s ease-in-out",
-								"&:hover": {
-									bgcolor: "blue",
-									color: "white",
-									cursor: "pointer",
-								},
-							}}
-						>
-							{/* <Stack
-								direction={"column"}
-								spacing={3}
-							> */}
-							<Typography fontWeight={"bold"}>{story.title}</Typography>
-							{/* <Typography variant="body">{story.abstract}</Typography> */}
-							{/* </Stack> */}
-						</Card>
-						{/* </Link> */}
-					</Grid>
-				);
-			})}
+							transition: "all 0.2s ease-in-out",
+							"&:hover": {
+								bgcolor: "blue",
+								color: "white",
+								cursor: "pointer",
+							},
+						}}
+					>
+						<Typography fontWeight="bold">
+							{index + 1}.{story.title}
+						</Typography>
+					</Card>
+				</Grid>
+			))}
 		</Grid>
 	);
 };
