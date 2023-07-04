@@ -1,3 +1,4 @@
+import { ArrowBack } from "@mui/icons-material";
 import {
 	Box,
 	Button,
@@ -25,7 +26,12 @@ const StoryDetails = () => {
 	return (
 		<>
 			<Container>
-				<Typography fontWeight={"bold"}>{story.title}</Typography>
+				<Typography
+					fontWeight={"bold"}
+					fontSize={"1.5rem"}
+				>
+					{story.title}
+				</Typography>
 				<Typography variant="body">{story.abstract}</Typography>
 
 				<Typography fontStyle={"italic"}>{story.byline}</Typography>
@@ -48,8 +54,23 @@ const StoryDetails = () => {
 						{story.url}
 					</Link>
 				</Typography>
-				<Button onClick={() => navigate("/")}>Back to Articles</Button>
-			</Container>{" "}
+				<Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+					<Button
+						variant="contained"
+						sx={{
+							bgcolor: "black",
+							"&:hover": {
+								bgcolor: "white",
+								color: "black",
+							},
+						}}
+						startIcon={<ArrowBack />}
+						onClick={() => navigate("/")}
+					>
+						Back to Articles
+					</Button>
+				</Box>
+			</Container>
 		</>
 	);
 };

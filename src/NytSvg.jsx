@@ -8,7 +8,7 @@ const NytSvg = () => {
 				justifyContent: "center",
 				alignItems: "center",
 
-				borderBottom: "5px solid black",
+				borderBottom: "3px solid black",
 				marginBottom: "2rem",
 				padding: "1rem",
 				width: "100%",
