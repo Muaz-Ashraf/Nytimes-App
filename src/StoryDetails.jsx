@@ -49,7 +49,7 @@ const StoryDetails = () => {
                     "& .MuiButton-endIcon": {
                       transform: "rotate(-45deg)",
                     },
-                    bgcolor: "red",
+                    bgcolor: "silver",
                     color: "white",
                   },
                 }}
