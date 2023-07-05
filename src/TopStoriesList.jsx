@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { MagnifyingGlass } from "react-loader-spinner";
 
 const TopStoriesList = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const TopStoriesList = () => {
   }, []);
 
   return (
-    <Box>
+    <Container sx={{ mb: 4 }}>
       {loading ? (
         <Box
           sx={{
@@ -43,7 +44,16 @@ const TopStoriesList = () => {
             height: "100vh",
           }}
         >
-          <CircularProgress color="primary" />
+          <MagnifyingGlass
+            visible={true}
+            height="150"
+            width="150"
+            ariaLabel="MagnifyingGlass-loading"
+            wrapperStyle={{}}
+            wrapperClass="MagnifyingGlass-wrapper"
+            glassColor="skyblue"
+            color="black"
+          />
         </Box>
       ) : (
         <Grid
@@ -110,7 +120,7 @@ const TopStoriesList = () => {
           ))}
         </Grid>
       )}
-    </Box>
+    </Container>
   );
 };
 

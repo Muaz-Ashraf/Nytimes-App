@@ -21,19 +21,37 @@ const StoryDetails = () => {
           <Typography fontWeight={"bold"} fontSize={"1.5rem"}>
             {story.title}
           </Typography>
-          <Typography variant="body">{story.abstract}</Typography>
-
+          <Typography variant="body" textAlign={"justify"}>
+            {story.abstract}
+          </Typography>
           <Typography fontStyle={"italic"}>{story.byline}</Typography>
-
-          <img height="250px" width="auto" src={story.multimedia[0].url} />
-
+          <img height="250px" width="auto" src={story.multimedia[0].url} />{" "}
+          <Typography fontWeight={"bold"} fontSize={"1rem"}>
+            Topics
+          </Typography>
+          {story.des_facet.map((item) => {
+            return (
+              <>
+                <ul>
+                  <li>{item}</li>
+                </ul>
+              </>
+            );
+          })}
           <Typography>
             You can read the complete article here:{" "}
             <Link to={story.url}>
               <Button
                 variant="outlined"
                 sx={{
-                  "& .MuiButton-endIcon": { transform: "rotate(-45deg)" },
+                  transition: "all 0.3s ease-in-out",
+                  "&:hover": {
+                    "& .MuiButton-endIcon": {
+                      transform: "rotate(-45deg)",
+                    },
+                    bgcolor: "red",
+                    color: "white",
+                  },
                 }}
                 endIcon={<ArrowForward />}
               >
