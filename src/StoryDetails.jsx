@@ -1,10 +1,6 @@
-import {
-  ArrowBack,
-  ArrowForward,
-  ArrowForwardIosRounded,
-} from "@mui/icons-material";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Box, Button, Container, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const StoryDetails = () => {
@@ -19,12 +15,14 @@ const StoryDetails = () => {
       {story ? (
         <Container>
           <Typography fontWeight={"bold"} fontSize={"1.5rem"}>
-            {story.title}
+            {story.title ?? story.headline.main.toString()}
           </Typography>
           <Typography variant="body" textAlign={"justify"}>
             {story.abstract}
           </Typography>
-          <Typography fontStyle={"italic"}>{story.byline}</Typography>
+          <Typography fontStyle={"italic"}>
+            {story.byline.original ? story.byline.original : story.byline}
+          </Typography>
           <Box
             sx={{
               display: "flex",
@@ -33,24 +31,29 @@ const StoryDetails = () => {
               maxWidth: "100%",
             }}
             component="img"
-            src={story.multimedia[0].url}
+            src={story.multimedia[0]?.url}
+            alt="Article Image"
           ></Box>
+          {story.des_facet && (
+            <>
+              <Typography fontWeight={"bold"} fontSize={"1rem"}>
+                Topics
+              </Typography>
 
-          <Typography fontWeight={"bold"} fontSize={"1rem"}>
-            Topics
-          </Typography>
-          {story.des_facet.map((item) => {
-            return (
-              <>
-                <ul>
-                  <li>{item}</li>
-                </ul>
-              </>
-            );
-          })}
+              {story.des_facet?.map((item, index) => {
+                return (
+                  <>
+                    <ul key={index}>
+                      <li>{item}</li>
+                    </ul>
+                  </>
+                );
+              })}
+            </>
+          )}
           <Typography>
             You can read the complete article here:{" "}
-            <Link to={story.url}>
+            <Link to={story.url ?? story.web_url}>
               <Button
                 variant="outlined"
                 sx={{
@@ -59,7 +62,7 @@ const StoryDetails = () => {
                     "& .MuiButton-endIcon": {
                       transform: "rotate(-45deg)",
                     },
-                    bgcolor: "silver",
+                    bgcolor: "black",
                     color: "white",
                   },
                 }}

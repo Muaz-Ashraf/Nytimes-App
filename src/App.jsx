@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import StoryDetails from "./StoryDetails";
 import NytSvg from "./NytSvg";
+import SearchStories from "./SearchStories";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<TopStoriesList />} />
         <Route path="/details/:index" element={<StoryDetails />} />
+        <Route path="/search" element={<SearchStories />} />
       </Routes>
     </>
   );
