@@ -50,7 +50,11 @@ const TopStoriesList = () => {
         style={{ display: "flex", flexWrap: "wrap" }}
       >
         <Grid item xs={6}>
-          <Stack direction={"row"} alignItems={"center"} spacing={1}>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            alignItems={"center"}
+            spacing={1}
+          >
             <Typography
               fontWeight={"bold"}
               component="label"
@@ -61,6 +65,7 @@ const TopStoriesList = () => {
             <Select
               id="category"
               name="category"
+              size="small"
               placeholder="Select Category"
               onChange={(e) => setSection(e.target.value)}
               value={section}
