@@ -25,8 +25,16 @@ const StoryDetails = () => {
             {story.abstract}
           </Typography>
           <Typography fontStyle={"italic"}>{story.byline}</Typography>
-
-          <img height="250px" width="100%" src={story.multimedia[0].url} />
+          <Box
+            sx={{
+              display: "flex",
+              height: "250px",
+              width: "auto",
+              maxWidth: "100%",
+            }}
+            component="img"
+            src={story.multimedia[0].url}
+          ></Box>
 
           <Typography fontWeight={"bold"} fontSize={"1rem"}>
             Topics
