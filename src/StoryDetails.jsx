@@ -25,7 +25,9 @@ const StoryDetails = () => {
             {story.abstract}
           </Typography>
           <Typography fontStyle={"italic"}>{story.byline}</Typography>
-          <img height="250px" width="auto" src={story.multimedia[0].url} />{" "}
+
+          <img height="250px" width="100%" src={story.multimedia[0].url} />
+
           <Typography fontWeight={"bold"} fontSize={"1rem"}>
             Topics
           </Typography>
