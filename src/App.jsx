@@ -13,17 +13,23 @@ import {
 import StoryDetails from "./StoryDetails";
 import NytSvg from "./NytSvg";
 import SearchStories from "./SearchStories";
+import Navbar from "./Navbar";
+import Login from "./Login";
+import Registration from "./Registration";
 
 function App() {
   return (
     <>
-      <NytSvg />
-
+      <Navbar />
       <Routes>
         <Route path="/" element={<TopStoriesList />} />
         <Route path="/details/:index" element={<StoryDetails />} />
         <Route path="/search" element={<SearchStories />} />
       </Routes>
+      {/* <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Registration />} />
+      </Routes> */}
     </>
   );
 }

@@ -115,7 +115,8 @@ const TopStoriesList = () => {
                 <Grid
                   key={index}
                   item
-                  xs={6}
+                  xs={12}
+                  sm={6}
                   md={4}
                   lg={3}
                   sx={{ display: "flex" }}
