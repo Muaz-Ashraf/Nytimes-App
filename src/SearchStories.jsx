@@ -56,7 +56,10 @@ const SearchStories = () => {
     setSearch("");
     setPage(0);
   };
-
+  useEffect(() => {
+    // Scroll to top of the page when the page changes
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
   return (
     <Container sx={{ mb: 4 }}>
       <form onSubmit={handleSubmit}>
