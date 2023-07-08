@@ -8,15 +8,18 @@ const Navbar = () => {
   const navigate = useNavigate();
   return (
     <AppBar
+      elevation={0}
+      width={"100vw"}
       sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        width: "100%",
-        bgcolor: "lightgray",
+
+        bgcolor: "whitesmoke",
         position: "static",
-        height: "60px",
+
         mb: "10px",
+        borderBottom: "2px solid black",
       }}
     >
       <Toolbar>

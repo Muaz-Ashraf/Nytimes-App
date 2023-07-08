@@ -1,9 +1,18 @@
-import { Outlet, Route, Router, Routes } from "react-router-dom";
+import {
+  Outlet,
+  Route,
+  Router,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import TopStoriesList from "./TopStoriesList";
 import {
   Box,
+  Button,
   Card,
   Container,
+  Divider,
   Grid,
   Select,
   Stack,
@@ -16,16 +25,23 @@ import SearchStories from "./SearchStories";
 import Navbar from "./Navbar";
 import Login from "./Login";
 import Registration from "./Registration";
+import SearchBy from "./SearchBy";
 
 function App() {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   return (
     <>
       <Navbar />
+      <SearchBy />
+
       <Routes>
-        <Route path="/" element={<TopStoriesList />} />
+        <Route path="/category" element={<TopStoriesList />} />
         <Route path="/details/:index" element={<StoryDetails />} />
         <Route path="/search" element={<SearchStories />} />
       </Routes>
+
       {/* <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />

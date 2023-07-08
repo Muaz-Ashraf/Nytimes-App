@@ -43,63 +43,46 @@ const TopStoriesList = () => {
 
   return (
     <Container sx={{ mb: 4 }}>
-      <Grid
-        container
-        spacing={2}
+      <Stack
+        direction={"row"}
+        alignItems={"center"}
+        justifyContent={"center"}
         mb={2}
-        style={{ display: "flex", flexWrap: "wrap" }}
+        spacing={1}
       >
-        <Grid item xs={6}>
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            alignItems={"center"}
-            spacing={1}
-          >
-            <Typography
-              fontWeight={"bold"}
-              component="label"
-              htmlFor="category"
-            >
-              Category:
-            </Typography>
-            <Select
-              id="category"
-              name="category"
-              size="small"
-              placeholder="Select Category"
-              onChange={(e) => setSection(e.target.value)}
-              value={section}
-            >
-              <MenuItem value="home">Home</MenuItem>
-              <MenuItem value="world">World</MenuItem>
-              <MenuItem value="science">Science</MenuItem>
-            </Select>
-          </Stack>
-        </Grid>
-        <Grid item xs={6} sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button
-            sx={{
-              bgcolor: "black",
-              "&:hover": { bgcolor: "#00000095", color: "black" },
-            }}
-            variant="contained"
-            onClick={() => navigate("/search")}
-          >
-            Search for Articles
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Card sx={{ p: 1, color: "white", bgcolor: "black" }}>
-            <Typography
-              fontWeight={"bold"}
-              textAlign={"center"}
-              fontSize={"1.5rem"}
-            >
-              {section.toUpperCase()}
-            </Typography>
-          </Card>
-        </Grid>
-      </Grid>
+        <Typography fontWeight={"bold"} component="label" htmlFor="cat">
+          Category:
+        </Typography>
+        <Select
+          sx={{
+            bgcolor: "black",
+            color: "white",
+            "& .MuiSvgIcon-root": {
+              color: "white",
+            },
+          }}
+          id="cat"
+          name="category"
+          size="small"
+          onChange={(e) => setSection(e.target.value)}
+          value={section}
+        >
+          <MenuItem value="home">Home</MenuItem>
+          <MenuItem value="world">World</MenuItem>
+          <MenuItem value="science">Science</MenuItem>
+        </Select>
+      </Stack>
+
+      <Card sx={{ p: 1, mb: 2, color: "white", bgcolor: "black" }}>
+        <Typography
+          fontWeight={"bold"}
+          textAlign={"center"}
+          fontSize={"1.5rem"}
+        >
+          {section.toUpperCase()}
+        </Typography>
+      </Card>
+
       {loading ? (
         <Loader />
       ) : (

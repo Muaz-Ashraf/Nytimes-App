@@ -1,5 +1,12 @@
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { ArrowBack, ArrowForward, Circle } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Container,
+  List,
+  ListItem,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -21,7 +28,11 @@ const StoryDetails = () => {
             {story.abstract}
           </Typography>
           <Typography fontStyle={"italic"}>
-            {story.byline.original ? story.byline.original : story.byline}
+            {story.byline.original
+              ? story.byline.original
+              : story.byline
+              ? story.byline
+              : ""}
           </Typography>
           <Box
             sx={{
@@ -33,7 +44,10 @@ const StoryDetails = () => {
             component="img"
             src={story.multimedia[0]?.url}
             alt="Article Image"
-          ></Box>
+          ></Box>{" "}
+          <Typography variant="p" fontSize={"0.8rem"}>
+            {story.multimedia[0]?.caption}
+          </Typography>
           {story.des_facet && (
             <>
               <Typography fontWeight={"bold"} fontSize={"1rem"}>
@@ -42,11 +56,12 @@ const StoryDetails = () => {
 
               {story.des_facet?.map((item, index) => {
                 return (
-                  <>
-                    <ul key={index}>
-                      <li>{item}</li>
-                    </ul>
-                  </>
+                  <List key={index} sx={{ p: 0 }}>
+                    <ListItem sx={{ py: 0 }}>
+                      <Circle sx={{ fontSize: "0.4rem", mr: 1 }} />
+                      {item}
+                    </ListItem>
+                  </List>
                 );
               })}
             </>
@@ -58,6 +73,7 @@ const StoryDetails = () => {
                 variant="outlined"
                 sx={{
                   transition: "all 0.3s ease-in-out",
+                  color: "black",
                   "&:hover": {
                     "& .MuiButton-endIcon": {
                       transform: "rotate(-45deg)",
@@ -83,9 +99,11 @@ const StoryDetails = () => {
                 },
               }}
               startIcon={<ArrowBack />}
-              onClick={() => navigate("/")}
+              onClick={() =>
+                story.des_facet ? navigate("/category") : navigate("/search")
+              }
             >
-              Back to Articles
+              {story.des_facet ? "Back to Category" : "Back to Article Search"}
             </Button>
           </Box>
         </Container>
