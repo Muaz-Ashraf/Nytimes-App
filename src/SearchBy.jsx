@@ -8,6 +8,7 @@ const SearchBy = () => {
   const pathnameEnd = pathname.split("/").slice(-1)[0];
   const isDetailsPage =
     Number.isInteger(Number(pathnameEnd)) || pathname === "/registration";
+
   return (
     !isDetailsPage && (
       <>

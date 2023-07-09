@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Container, Stack, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Divider,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import SearchBy from "./SearchBy";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -25,13 +33,12 @@ const Login = () => {
 
   return (
     <Container
+      maxWidth={"sm"}
       sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         paddingX: "5rem",
-
-        borderRadius: 1,
       }}
     >
       {!isLoggedIn ? (
@@ -78,12 +85,12 @@ const Login = () => {
               }}
             >
               Login
-            </Button>{" "}
+            </Button>
+
             <Button
               fullWidth
               variant="contained"
               color="primary"
-              type="submit"
               sx={{
                 marginTop: 2,
                 bgcolor: "black",

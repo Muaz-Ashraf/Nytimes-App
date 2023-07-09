@@ -8,8 +8,8 @@ const Animation = ({ children }) => {
       animate={{ x: 0 }}
       transition={{
         type: "spring",
-        stiffness: 260,
-        damping: 20,
+        stiffness: 200,
+        damping: 30,
       }}
     >
       {children}
