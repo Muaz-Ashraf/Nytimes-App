@@ -25,15 +25,13 @@ const Login = () => {
 
   return (
     <Container
-      maxWidth="sm"
       sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        padding: 2,
-        backgroundColor: "#f5f5f5",
+        paddingX: "5rem",
+
         borderRadius: 1,
-        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
       }}
     >
       {!isLoggedIn ? (
@@ -71,9 +69,31 @@ const Login = () => {
               variant="contained"
               color="primary"
               type="submit"
-              sx={{ marginTop: 2 }}
+              sx={{
+                marginTop: 2,
+                bgcolor: "black",
+                "&:hover": {
+                  bgcolor: "black",
+                },
+              }}
             >
-              Submit
+              Login
+            </Button>{" "}
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              type="submit"
+              sx={{
+                marginTop: 2,
+                bgcolor: "black",
+                "&:hover": {
+                  bgcolor: "black",
+                },
+              }}
+              onClick={() => navigate("/category")}
+            >
+              Login as Guest
             </Button>
           </form>
           <Stack mt={1} direction={"row"} alignItems={"center"} spacing={2}>

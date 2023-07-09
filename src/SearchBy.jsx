@@ -6,9 +6,10 @@ const SearchBy = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const pathnameEnd = pathname.split("/").slice(-1)[0];
-  const isDetailsPage = Number.isInteger(Number(pathnameEnd));
+  const isDetailsPage =
+    Number.isInteger(Number(pathnameEnd)) || pathname === "/registration";
   return (
-    (!isDetailsPage || pathname === "/") && (
+    !isDetailsPage && (
       <>
         <Stack
           direction={"row"}
