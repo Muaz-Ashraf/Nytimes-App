@@ -43,7 +43,7 @@ const SearchStories = () => {
       setErrorMsg(error.response);
       setLoading(false);
       setPage(0);
-      setSearchResults();
+      setSearchResults("");
     }
   };
 
@@ -53,7 +53,7 @@ const SearchStories = () => {
     setLoading(true);
     setSearchResults(search);
     getData();
-    setSearch("");
+
     setPage(0);
   };
   useEffect(() => {
