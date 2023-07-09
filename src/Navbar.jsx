@@ -24,11 +24,6 @@ const Navbar = () => {
     >
       <Toolbar>
         <NytSvg />
-        {/* <IconButton onClick={() => navigate("/")}>
-          <ArrowBack />
-        </IconButton> */}
-
-        {/* <Button onClick={() => navigate("/login")}>Login</Button> */}
       </Toolbar>
     </AppBar>
   );

@@ -26,14 +26,18 @@ const TopStoriesList = () => {
   const [section, setSection] = useState("home");
 
   const getData = async () => {
-    const response = await axios.get(
-      `https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=vpPk0dSc3wlSGZUQriw78bkglP22tr2E`
-    );
+    try {
+      const response = await axios.get(
+        `https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=vpPk0dSc3wlSGZUQriw78bkglP22tr2E`
+      );
 
-    setData(response.data.results);
-    setLoading(false);
+      setData(response.data.results);
+      setLoading(false);
 
-    console.log(response.data.results);
+      console.log(response.data.results);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
