@@ -1,76 +1,77 @@
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
-  Box,
-  Button,
-  Card,
   Container,
   Grid,
-  IconButton,
+  Typography,
+  Button,
   Stack,
   TextField,
-  Typography,
+  Card,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { MagnifyingGlass } from "react-loader-spinner";
-import axios from "axios";
-import Loader from "./Loader";
-import { motion } from "framer-motion";
-import Animation from "./Animation";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import Loader from "./Loader";
+import Animation from "./Animation";
 
 const SearchStories = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(new Map());
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [search, setSearch] = useState("");
-  const [errorMsg, setErrorMsg] = useState();
-  const [searchResults, setSearchResults] = useState();
-
-  const getData = async () => {
-    try {
-      setErrorMsg(null);
-      const response = await axios.get(
-        `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&page=${page}&api-key=vpPk0dSc3wlSGZUQriw78bkglP22tr2E`
-      );
-
-      setData(response.data.response.docs);
-      setLoading(false);
-      console.log(response);
-    } catch (error) {
-      console.error("An error occurred:", error);
-      setErrorMsg(error.response);
-      setLoading(false);
-      setPage(0);
-      setSearchResults("");
-    }
-  };
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [searchResults, setSearchResults] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setSearchResults(search);
     setIsSubmitted(true);
     setLoading(true);
-    setSearchResults(search);
-    getData();
-
     setPage(0);
+    setData(null);
   };
+
   useEffect(() => {
-    // Scroll to top of the page when the page changes
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [page]);
+    if (isSubmitted) {
+      const getData = async () => {
+        try {
+          setErrorMsg(null);
+          if (data?.has(page)) {
+            setLoading(false);
+            return;
+          }
+          const response = await axios.get(
+            `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&page=${page}&api-key=vpPk0dSc3wlSGZUQriw78bkglP22tr2E`
+          );
+          const newData = new Map(data);
+          newData.set(page, response.data.response.docs);
+          setData(newData);
+          setLoading(false);
+          console.log(response);
+          console.log(data);
+        } catch (error) {
+          console.error("An error occurred:", error);
+          setErrorMsg(error.response);
+          setLoading(false);
+          setData(new Map());
+          setSearchResults(null);
+        }
+      };
+
+      setLoading(true);
+      getData();
+    }
+  }, [isSubmitted, searchResults, page]);
+
   return (
     <Container sx={{ mb: 4 }}>
       <form onSubmit={handleSubmit}>
         <Stack
           direction={"row"}
           spacing={2}
-          sx={{
-            mb: 2,
-
-            justifyContent: "center",
-          }}
+          sx={{ mb: 2, justifyContent: "center" }}
         >
           <TextField
             InputProps={{
@@ -114,7 +115,7 @@ const SearchStories = () => {
             style={{ display: "flex", flexWrap: "wrap" }}
           >
             {!errorMsg &&
-              data?.map((story, index) => (
+              Array.from(data.get(page) ?? []).map((story, index) => (
                 <Grid
                   key={index}
                   item
@@ -132,17 +133,14 @@ const SearchStories = () => {
                       flex: 1,
                       display: "flex",
                       justifyContent: "center",
-
                       bgcolor: "#202020",
                       color: "white",
                       py: 2,
                       px: 3,
                       border: "2px solid black",
-
                       transition: "all 0.2s ease-in-out",
                       "&:hover": {
                         bgcolor: "#606060",
-
                         cursor: "pointer",
                       },
                     }}
@@ -166,7 +164,7 @@ const SearchStories = () => {
           </Grid>
         </Animation>
       )}
-      {!errorMsg && data && (
+      {!errorMsg && isSubmitted && (
         <Stack
           direction={"row"}
           mt={2}
@@ -175,11 +173,10 @@ const SearchStories = () => {
           alignItems={"center"}
         >
           <Button
-            disabled={loading || page === 0 ? true : false}
+            disabled={loading || page === 0}
             onClick={() => {
               setPage((prevPage) => prevPage - 1);
               setLoading(true);
-              getData();
             }}
           >
             <ArrowBack />
@@ -190,11 +187,10 @@ const SearchStories = () => {
             Page {page + 1}
           </Typography>
           <Button
-            disabled={loading && true}
+            disabled={loading}
             onClick={() => {
               setPage((prevPage) => prevPage + 1);
               setLoading(true);
-              getData();
             }}
           >
             Next
