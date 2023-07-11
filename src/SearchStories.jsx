@@ -30,7 +30,7 @@ const SearchStories = () => {
     setIsSubmitted(true);
     setLoading(true);
     setPage(0);
-    setData(null);
+    setData(new Map());
   };
 
   useEffect(() => {
